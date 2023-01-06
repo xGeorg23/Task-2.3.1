@@ -6,6 +6,12 @@
     <title></title>
 </head>
 <body>
+<button>
+    <a href="/cars" style="color: black">Cars</a>
+</button>
+<button>
+    <a href="/cars?count=2" style="color: black">Cars 2 </a>
+</button>
 <div>
     <th:block th:each="msg : ${messages}">
         <h1 th:text="${msg}"></h1>
