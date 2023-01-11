@@ -7,13 +7,13 @@
 </head>
 <body>
 <button>
-    <a href="/cars" style="color: black">Cars</a>
+    <a href="/" style="color: black">Home</a>
 </button>
 <button>
-    <a href="/cars?count=2" style="color: black">Cars 2 </a>
+    <a href="/user" style="color: black">User</a>
 </button>
 <div>
-    <th:block th:each="msg : ${messages}">
+    <th:block th:each="msg : ${index}">
         <h1 th:text="${msg}"></h1>
     </th:block>
 </div>
