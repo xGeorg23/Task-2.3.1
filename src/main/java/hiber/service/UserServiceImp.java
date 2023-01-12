@@ -28,7 +28,7 @@ public class UserServiceImp implements UserService {
 
    @Transactional
    @Override
-   public User getUserById(int id) {
+   public User getUserById(long id) {
       return null;
    }
 
