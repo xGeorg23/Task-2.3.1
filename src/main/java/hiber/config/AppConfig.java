@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 
 @Configuration
@@ -40,13 +41,18 @@ public class AppConfig {
    @Bean
    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
       JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean(); // HibernateExceptions, PersistenceExceptions... to DataAccessException
+      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
       em.setDataSource(getDataSource());
+
+      Properties props = new Properties();
+      props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+      props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+
+      em.setJpaProperties(props);
       em.setPackagesToScan("hiber.model");
       em.setJpaVendorAdapter(vendorAdapter);
       return em;
    }
-
 
    @Bean
    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {

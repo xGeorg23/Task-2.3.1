@@ -27,11 +27,27 @@ public class User {
       this.email = email;
    }
 
+   public void setId(Long id) {
+      this.id = id;
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public void setLastName(String lastName) {
+      this.lastName = lastName;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
    public Long getId() {
       return id;
    }
 
-   public String getFirstName() {
+   public String getName() {
       return name;
    }
 
@@ -47,7 +63,7 @@ public class User {
    public String toString() {
       return "Person " + getId()
               + " " + getEmail()
-              + " " + getFirstName()
+              + " " + getName()
               + " " + getLastName();
    }
 

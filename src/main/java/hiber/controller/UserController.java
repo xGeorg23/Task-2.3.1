@@ -3,11 +3,16 @@ package hiber.controller;
 import hiber.config.AppConfig;
 import hiber.config.WebConfig;
 import hiber.model.User;
+import hiber.service.UserService;
 import hiber.service.UserServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,31 +20,31 @@ import java.util.List;
 @Controller
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping(value = "/")
     public String allUser(ModelMap model) {
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-
-
-        UserServiceImp userService = context.getBean(UserServiceImp.class);
-
-        userService.add(new User("","User1","Lastname1"));
-        userService.add(new User("","User2","Lastname2"));
-        userService.add(new User("","User3","Lastname3"));
-        userService.add(new User("","User4","Lastname4"));
-
-        model.addAttribute("index", userService.listUsers());
-
+        model.addAttribute("allUsers", userService.getUsers());
         return "index";
     }
 
-    @GetMapping(value = "/user")
+    @GetMapping(value = "/createUser")
     public String addUser(ModelMap model) {
-        List<String> messages = new ArrayList<>();
-        messages.add("Hello!");
-        messages.add("I'm Spring MVC application");
-        messages.add("5.2.0 version by sep'19 ");
-        model.addAttribute("index", messages);
+        User user = new User();
+        model.addAttribute("user", user);
         return "user";
+    }
+
+    @PostMapping("/saveUser")
+    public String saveEmployee(@ModelAttribute("user") User user) {
+        userService.addUser(user);
+        return "redirect:/";
+    }
+
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable(value = "id") long id) {
+        userService.deleteUser(id);
+        return "redirect:/";
     }
 }

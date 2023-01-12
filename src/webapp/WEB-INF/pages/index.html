@@ -6,16 +6,37 @@
     <title></title>
 </head>
 <body>
-<button>
-    <a href="/" style="color: black">Home</a>
-</button>
-<button>
-    <a href="/user" style="color: black">User</a>
-</button>
+
 <div>
-    <th:block th:each="msg : ${index}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
+    <h1>Employees List</h1>
+    <button>
+        <a th:href="@{/user}">u</a>
+    </button>
+    <button>
+        <a th:href="@{/createUser}">Create user</a>
+    </button>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Employee First Name</th>
+            <th>Employee Last Name</th>
+            <th>Employee Email</th>
+            <th> Actions </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="users : ${allUsers}">
+            <td th:text="${users.name}"></td>
+            <td th:text="${users.lastName}"></td>
+            <td th:text="${users.email}"></td>
+            <td>
+                <a th:href="@{/showFormForUpdate/{id}(id=${users.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/deleteUser/{id}(id=${users.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
