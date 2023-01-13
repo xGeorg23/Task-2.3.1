@@ -29,13 +29,13 @@ public class UserServiceImp implements UserService {
    @Transactional
    @Override
    public User getUserById(long id) {
-      return null;
+      return userDao.getUserById(id);
    }
 
    @Transactional
    @Override
    public void updateUser(User user) {
-
+      userDao.updateUser(user);
    }
 
    @Transactional
