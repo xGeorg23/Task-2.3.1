@@ -8,7 +8,7 @@
 <div>
 
 
-  <form action="#" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}" method="PATCH">
+  <form action="#" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}" method="PATCH">
 
     <!-- Add hidden form field to handle update -->
 

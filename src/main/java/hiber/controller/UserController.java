@@ -1,20 +1,15 @@
 package hiber.controller;
 
-import hiber.config.AppConfig;
-import hiber.config.WebConfig;
 import hiber.model.User;
 import hiber.service.UserService;
-import hiber.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
+@RequestMapping("/")
 @Controller
 public class UserController {
 
@@ -46,13 +41,13 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/{id}/update")
+    @GetMapping("/update/{id}")
     public String showFormForUpdate(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "update";
     }
 
-    @PatchMapping("/{id}")
+    @RequestMapping("/{id}")
     public String updateUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
         return "redirect:/";

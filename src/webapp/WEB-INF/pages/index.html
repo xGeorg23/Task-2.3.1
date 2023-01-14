@@ -28,7 +28,7 @@
             <td th:text="${users.lastName}"></td>
             <td th:text="${users.email}"></td>
             <td>
-                <a th:href="@{/{id}/update(id=${users.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/update/{id}(id=${users.id})}" class="btn btn-primary">Update</a>
                 <a th:href="@{/deleteUser/{id}(id=${users.id})}" class="btn btn-danger">Delete</a>
             </td>
         </tr>
